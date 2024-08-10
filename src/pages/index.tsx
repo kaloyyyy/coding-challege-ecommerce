@@ -22,20 +22,22 @@ const Home = () => {
             try {
                 const response = await fetch(`/api/products?page=${currentPage}&limit=${PRODUCTS_PER_PAGE}`);
                 const data = await response.json();
+
                 if (data && Array.isArray(data.products)) {
-                    dispatch(setProducts(data));
+                    dispatch(setProducts({ products: data.products, totalPages: data.totalPages }));
                 } else {
                     console.error('Data does not contain products array:', data);
-                    dispatch(setProducts([]));
+                    dispatch(setProducts({ products: [], totalPages: 1 })); // Ensure to provide an object with totalPages
                 }
             } catch (error) {
                 console.error('Error fetching products:', error);
-                dispatch(setProducts([]));
+                dispatch(setProducts({ products: [], totalPages: 1 })); // Ensure to provide an object with totalPages
             }
         };
 
         fetchProducts();
     }, [dispatch, currentPage]);
+
 
     useEffect(() => {
         if (Array.isArray(products)) {
