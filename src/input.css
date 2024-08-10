@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+html,body{
+    background: #b2b2b2;
+}
+
+.product-image-container {
+    position: relative;
+    width: 150px;
+    height: 150px; /* Adjust height as needed */
+}
+
+.product-image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
